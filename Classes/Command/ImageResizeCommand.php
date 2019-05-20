@@ -36,19 +36,22 @@ class ImageResizeCommand extends Command
         $output->writeln(
             sprintf('Resize file %s and store in %s as %s', $inputPath, dirname($destination), basename($destination))
         );
-//        exit;
 
         $resourceFactory = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance();
         $destinationFolder = $resourceFactory->retrieveFileOrFolderObject(dirname($destination));
         $image = $resourceFactory->retrieveFileOrFolderObject($inputPath);
         if (substr($image->getMimeType(), 0, 6) === 'image/') {
             $processingInstructions = [
-                'maxWidth' => 1200,
+                'maxWidth'  => 1200,
                 'maxHeight' => 1200,
-                'crop' => false,
+                'crop'      => false,
             ];
             $processedImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
-            $processedImage->moveTo($destinationFolder)->rename(basename($destination));
+            $output->writeln('Did process file');
+
+            // This will crash:
+            $processedImage->moveTo($destinationFolder);
+            $output->writeln('Did move file');
         }
     }
 }
