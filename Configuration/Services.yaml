@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Iresults\ResizeImageError\Command\ImageResizeCommand:
+    tags:
+      - name: console.command
+        command: 'resize:dosomething'
+        description: 'Test something'
