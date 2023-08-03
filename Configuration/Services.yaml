@@ -4,8 +4,12 @@ services:
     autoconfigure: true
     public: false
 
+  Iresults\ResizeImageError\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+
   Iresults\ResizeImageError\Command\ImageResizeCommand:
     tags:
-      - name: console.command
-        command: 'resize:dosomething'
+      - name: imagestuff
+        command: 'resize-image-error:image-resize'
         description: 'Test something'
